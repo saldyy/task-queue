@@ -1,18 +1,10 @@
-async function processTask(task: any): Promise<any> {
-  // Simulate an asynchronous task
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log(task)
-      resolve(task * 2); // Example task: multiply by 2
-    }, 1000);
-  });
-}
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms * 1000));
 
-async function runTasksWithConcurrencyLimit<T>(
+const runTasksWithConcurrencyLimit = async <T>(
   data: T[],
   asyncFunc: (data: T) => Promise<void>,
   concurrencyLimit: number
-): Promise<void> {
+): Promise<void> => {
   let index = 0;
 
   const taskWrapper = async () => {
@@ -31,7 +23,6 @@ async function runTasksWithConcurrencyLimit<T>(
 
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms * 1000));
 
 (async () => {
   console.time('runTasksWithConcurrencyLimit')
